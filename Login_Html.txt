@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="none" />
+
+    <title>Login</title>
+    {{{SignInWidgetResources}}}
+<style>
+#okta-sign-in .auth-org-logo{
+display: none;  
+}
+#okta-sign-in .o-form-head{
+float: left;  
+font-size: 40px;
+border-bottom: 6px solid #4caf50;
+margin-bottom: 50px;
+padding: 13px 0;
+}
+#okta-sign-in.auth-container .okta-form-label{
+color: black;  
+}
+#okta-sign-in.auth-container h2{
+ color: black;
+ padding: 13px 0;
+}
+#okta-sign-in .auth-header{
+border-bottom: none;
+        padding: none;
+}
+#okta-sign-in.auth-container.main-container {
+            background: transparent;
+            border: 0;
+            margin-top: 0px;
+            box-shadow: none;
+            padding: 0;
+            color: black;            
+        }
+        #okta-sign-in.auth-container .button-primary {
+            color: black;
+            background: #4caf50;
+        }
+#okta-sign-in .registration-container .content-container{
+display: none;
+}
+#okta-sign-in.auth-container .link:link{color: #eac900}
+.footer{color: #eac900}
+</style>
+</head>
+<body>
+    <div class="login-bg-image" style="background-image: {{bgImageUrl}}"></div>
+    <div id="okta-login-container"></div>
+
+    <!--
+        "OktaUtil" defines a global OktaUtil object
+        that contains methods used to complete the Okta login flow.
+     -->
+    {{{OktaUtil}}}
+
+    <script type="text/javascript">
+        // "config" object contains default widget configuration
+        // with any custom overrides defined in your admin settings.
+        var config = OktaUtil.getSignInWidgetConfig();
+
+        // Render the Okta Sign-In Widget
+        var oktaSignIn = new OktaSignIn(config);
+        oktaSignIn.renderEl({ el: '#okta-login-container' },
+            OktaUtil.completeLogin,
+            function(error) {
+                // Logs errors that occur when configuring the widget.
+                // Remove or replace this with your own custom error handler.
+                console.log(error.message, error);
+            }
+        );
+    </script>
+</body>
+	<div class="footer">
+		<center>
+			&copy;<script type="text/javascript">document.write((new Date()).getFullYear())</script> Egnarus, Inc. All rights reserved
+		</center>
+	</div>
+</html>
